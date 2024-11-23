@@ -1,42 +1,65 @@
-import { agregarBoxeador } from "./Promesas.js";
-
-//Configura los eventos y las funcionalidades iniciales cuando la página se carga.
+import { actualizarBoxeador, obtenerBoxer } from "./Promesas.js";
+//configura los eventos y funcionalidades iniciales al cargar la página.
 window.addEventListener("load", () => {
-    console.log("hola");
-    //Evento para registrar un nuevo boxeador cuando se presiona el botón "Registrar".
-    document.getElementById("btnBoton").addEventListener("click", () => {
-        // Recupero los elementos del formulario
+    // Obtiene los parámetros de la URL para extraer el ID del boxeador.
+    let valor = window.location.search;
+    const urlParams = new URLSearchParams(valor);
+    var id = urlParams.get("id");
+
+    
+    //Obtiene los datos del boxeador con el ID especificado y los carga en el formulario.
+    obtenerBoxer(id).then((p) => {
+        console.log(p);
+
+        // Selecciona los elementos del formulario.
+        let Nombre = document.getElementById("Nombre");
+        let Apellido = document.getElementById("Apellido");
+        let Edad = document.getElementById("Edad");
+        let Categoria = document.getElementById("Categoria");
+        let Victoria = document.getElementById("Victorias");
+        let Derrotas = document.getElementById("Derrotas");
+        let Descripcion = document.getElementById("Descripcion");
+
+        // Rellena los campos del formulario con los datos del boxeador.
+        Nombre.value = p.Nombre;
+        Apellido.value = p.Apellido;
+        Edad.value = p.Edad;
+        Categoria.value = p.Categoria;
+        Victoria.value = p.Victorias;
+        Derrotas.value = p.Derrotas;
+        Descripcion.value = p.Descripcion;
+    });
+
+    // Selecciona el botón de actualizar.
+    let btnActualizar = document.getElementById("btnActualizar");
+
+    
+    //Asigna un evento para manejar la actualización del boxeador.
+    btnActualizar.addEventListener("click", () => {
+        console.log("Le diste al botón");
+
+        // Selecciona los elementos del formulario.
         let eNombre = document.getElementById("Nombre");
         let eApellido = document.getElementById("Apellido");
         let eEdad = document.getElementById("Edad");
-
         let eMasculino = document.getElementById("masculino");
         let eFemenino = document.getElementById("femenino");
-
         let eCategoria = document.getElementById("Categoria");
         let eVictoria = document.getElementById("Victorias");
         let eDerrotas = document.getElementById("Derrotas");
         let eDescripcion = document.getElementById("Descripcion");
 
-        // Recupero el contenido de los elementos del formulario
+        // Recupera los valores de los campos del formulario.
         let vNombre = eNombre.value.trim();
         let vApellido = eApellido.value.trim();
         let vEdad = eEdad.value.trim();
-        let vGenero = "";
-
-        // Determino el género basado en los radio buttons
-        if (eMasculino.checked) {
-            vGenero = "masculino"; // Si está marcado el radio "masculino", se asigna este valor
-        } else if (eFemenino.checked) {
-            vGenero = "femenino"; // Si está marcado el radio "femenino", se asigna este valor
-        }
-
+        let vGenero = eMasculino.checked ? "masculino" : eFemenino.checked ? "femenino" : "";
         let vCategoria = eCategoria.value.trim();
         let vVictorias = eVictoria.value.trim();
         let vDerrotas = eDerrotas.value.trim();
         let vDescripcion = eDescripcion.value.trim();
 
-        // Validaciones
+        // Realiza las validaciones correspondientes.
         let errores = []; // Creamos un array para almacenar los mensajes de error.
 
         // Validamos si el campo "Nombre" está vacío
@@ -79,7 +102,7 @@ window.addEventListener("load", () => {
         }
         
 
-        // Crear objeto un boxeador
+        // Crea el objeto actualizado del boxeador.
         let boxeador = {
             Nombre: vNombre,
             Apellido: vApellido,
@@ -91,34 +114,42 @@ window.addEventListener("load", () => {
             Descripcion: vDescripcion,
         };
 
-        // Llamo a la función para registrar el boxeador en la base de datos
-        agregarBoxeador(boxeador);
-
-        // Notificación de éxito
-        alert("¡Se ha registrado con éxito!");
-        console.log(boxeador); // Muestro los datos del boxeador registrado en la consola
+        /**
+         * Actualiza el boxeador llamando a la función `actualizarBoxeador` y maneja la respuesta.
+         */
+        actualizarBoxeador(id, boxeador)
+            .then(() => {
+                alert("¡Boxeador actualizado con éxito!");
+            })
+            .catch((error) => {
+                alert("Hubo un error al actualizar el boxeador: " + error.message);
+            });
     });
 
-    //Evento para alternar los estilos del formulario entre dos clases CSS.
+    /**
+     * Asigna un evento para redirigir a la página de la tabla.
+     */
+    document.getElementById("irTabla").addEventListener("click", () => {
+        window.location.href = "/Tabla.html";
+    });
+
+    /**
+     * Cambia el estilo del formulario entre modo claro y oscuro.
+     */
     document.getElementById("cambioColor").addEventListener("click", () => {
-        console.log("hola");
+        console.log("Cambiando tema del formulario...");
         let elements = document.getElementsByClassName("formulario1");
+
+        // Itera sobre los elementos para alternar entre las clases de estilo.
         for (let index = 0; index < elements.length; index++) {
             const element = elements[index];
             if (element.classList.contains("formulario1")) {
-                // Si el elemento tiene la clase "formulario1", la cambia a "formulario2"
                 element.classList.remove("formulario1");
                 element.classList.add("formulario2");
             } else if (element.classList.contains("formulario2")) {
-                // Si el elemento tiene la clase "formulario2", la cambia a "formulario1"
                 element.classList.remove("formulario2");
                 element.classList.add("formulario1");
             }
         }
-    });
-
-    //Evento para redirigir al usuario a la página de la tabla de boxeadores.
-    document.getElementById("irTabla").addEventListener("click", () => {
-        window.location.href = "/Tabla.html"; // Redirige a la página de la tabla
     });
 });

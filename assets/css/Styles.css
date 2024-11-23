@@ -1,4 +1,141 @@
 body{
-    background-image:url(/assets/css/Imagen/descarga.jfif);
-    background-color: brown;
+    background-image:url(/assets/css/Imagen/red-gloves-boxing-highlight-photo-ifabsw0j6k0g42lc.jpg);
+    background-size: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.formulario1{
+    background-color: white;
+    width: 40%;
+    border-radius: 10px;
+    margin-left: 15px;
+    text-align: center;
+    float: inline-start;
+}
+.formulario2{
+    background-color: black;
+    color: white;
+    width: 40%;
+    border-radius: 10px;
+    margin-left: 15px;
+    text-align: center;
+    float: inline-start;
+
+}
+/* Botones */
+button {
+    display: block;
+    width: 110%;
+    padding: 1px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #000;
+    color: white;
+    size: 500px;
+}
+/* Estilo de las alertas */
+input[type="text"], 
+input[type="number"], 
+textarea, 
+select {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 2px solid #ccc; /* Borde por defecto */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+
+/* Tabla */
+.tablaBonita {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.tablaBonita thead {
+    background: #c40000; /* Rojo intenso */
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.tablaBonita th, .tablaBonita td {
+    padding: 10px 15px;
+    border: 2px solid #333;
+    text-align: center;
+}
+
+.tablaBonita tbody tr:nth-child(odd) {
+    background: white; /* Gris oscuro */
+}
+
+.tablaBonita tbody tr:nth-child(even) {
+    background: #777575; /* Gris intermedio */
+}
+
+.tablaBonita tbody tr:hover {
+    background: #f4c20d; /* Amarillo brillante */
+    color: #000;
+    cursor: pointer;
+}
+
+/* Bordes */
+.tablaBonita th {
+    border-bottom: 3px solid #f4c20d;
+}
+
+.tablaBonita td {
+    font-size: 1rem;
+}
+
+
+
+
+.tablaBonita-oscura {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    background-color: #1a1a1a; /* Fondo oscuro */
+    color: #f4f4f4; /* Texto claro */
+}
+
+.tablaBonita-oscura thead {
+    background: #c40000; /* Rojo intenso */
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.tablaBonita-oscura th, .tablaBonita-oscura td {
+    padding: 10px 15px;
+    border: 2px solid #444; /* Bordes oscuros */
+    text-align: center;
+}
+
+.tablaBonita-oscura tbody tr:nth-child(odd) {
+    background: #2c2c2c; /* Gris oscuro */
+}
+
+.tablaBonita-oscura tbody tr:nth-child(even) {
+    background: #3a3a3a; /* Gris ligeramente más claro */
+}
+
+.tablaBonita-oscura tbody tr:hover {
+    background: #c40000; /* Rojo intenso */
+    color: #fff; /* Texto blanco */
+    cursor: pointer;
+}
+
+/* Bordes */
+.tablaBonita-oscura th {
+    border-bottom: 3px solid #f4c20d; /* Amarillo brillante */
+}
+
+.tablaBonita-oscura td {
+    font-size: 1rem;
 }
